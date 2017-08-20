@@ -1,4 +1,5 @@
 import pygame
+import os
 
 pygame.init()
 
@@ -7,8 +8,9 @@ GREEN = (0, 255, 0)           #       v
 BLUE = (0, 0, 255)            #       v
 GRAY = ( 128, 128, 128)       #----------------
 
+walls = []
 playerlist = pygame.sprite.Group() #putting player in its own list
-screen= pygame.display.set_mode((640,480))#Screen size
+screen= pygame.display.set_mode((400, 400))#Screen size
 keypress = pygame.key.get_pressed() 
 rol = 0 #right or left setting to 0
 uod = 0 # setting up or down to 0
@@ -45,12 +47,21 @@ class Player(pygame.sprite.Sprite):
                     player.image = pygame.image.load("W.png") #Change player image to W.png
             elif keypress[pygame.K_DOWN]:                  #Is it north or south and changing
                 player.image = pygame.image.load("S.png")  #              Image
-             else:                                         #                v
+            else:                                          #                v
                 player.image = pygame.image.load("N.png")  #---------------------------------
                 
         def moving(): #Moving function consisting of direction + the determined velocity.
             player.rect.centerx = player.rect.centerx + player.velocityx
             player.rect.centery = player.rect.centery + player.velocityy
+
+        
+class Wall(pygame.sprite.Sprite):
+    
+    def __init__(self, pos):
+        walls.append(self)
+        self.image = pygame.image.load("walls.jpg")
+        self.rect = pygame.Rect(pos[0], pos[1], 16, 16)
+    
 
 #===============================================================================================
 #------------------------------Variable setting/code before loop--------------------------------
@@ -62,7 +73,47 @@ for counter in range(1):
     player.rect.centery = 137 #Setting players start Y co-ordinate
     playerlist.add(player)
 
-pygame.display.set_caption("Game") #Setting caption at top to Game
+pygame.display.set_caption("Game Game") #Setting caption at top to Game
+
+level = [
+"WWWWWWWWWWWWWWWWWWWWWWWWWWW",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"WWWWWWWWWWWWWWWWWWWWWWWWWWW",
+]
+
+x = y = 0
+for row in level:
+    for col in row:
+        if col == "W":
+            Wall((x, y))
+        if col == "E":
+            end_rect = pygame.Rect(x, y, 16, 16)
+        x += 16
+    y += 16
+    x = 0
+
 
 #===============================================================================================
 #------------------------------------------Game Loop--------------------------------------------
@@ -109,12 +160,14 @@ while not done:
     for player in playerlist:
          Player.moving()
 
-    
-
         
     keypress = pygame.key.get_pressed()        
-   
+
     screen.fill(GRAY)               # Screen fill GRAY
+    for wall in walls:
+        pygame.draw.rect(screen, (255, 255, 255), wall.rect)
+        
+        
     playerlist.draw(screen)         # draw the player onto pf the screen
     player.velocityx = 0            # default x velocity = 0
     player.velocityy = 0            # default y velocity = 0
