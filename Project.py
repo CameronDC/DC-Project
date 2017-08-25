@@ -76,7 +76,19 @@ for counter in range(1):
 pygame.display.set_caption("Game Game") #Setting caption at top to Game
 
 level = [
-"WWWWWWWWWWWWWWWWWWWWWWWWWWW",
+"WWWWWWWWWW     WWWWWWWWWWWWWWW",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"W                       W",
+"                       ",
+"                      ",
+"                       ",
+"                       ",
 "W                       W",
 "W                       W",
 "W                       W",
@@ -88,19 +100,7 @@ level = [
 "W                       W",
 "W                       W",
 "W                       W",
-"W                       W",
-"W                       W",
-"W                       W",
-"W                       W",
-"W                       W",
-"W                       W",
-"W                       W",
-"W                       W",
-"W                       W",
-"W                       W",
-"W                       W",
-"W                       W",
-"WWWWWWWWWWWWWWWWWWWWWWWWWWW",
+"WWWWWWWWWW     WWWWWWWWWWWWWWW",
 ]
 
 x = y = 0
