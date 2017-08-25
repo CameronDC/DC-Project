@@ -83,23 +83,21 @@ class Player(pygame.sprite.Sprite):
             
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self,x,y):  # initial position
-        self.x = x 
-        self.y = y
+    def __init__(self, health):  # initial position
         super().__init__()
         self.image = pygame.image.load("enemy.png") #Load default image for enemy
         self.rect = self.image.get_rect()
-    def move(self, speed=5): # chase movement
+    def move(speed): 
         # Movement along x direction
-        if self.x > player.rect.centerx:
-            self.x -= speed
-        elif self.x < player.rect.centerx:
-            self.x += speed
+        if enemy.rect.centerx > player.rect.centerx:
+            enemy.rect.centerx -= speed
+        elif enemy.rect.centerx < player.rect.centerx:
+            enemy.rect.centerx += speed
         # Movement along y direction
-        if self.y < player.rect.centery:
-            self.y += speed
-        elif self.y > player.rect.centery:
-            self.y -= speed          
+        if enemy.rect.centery < player.rect.centery:
+            enemy.rect.centery += speed
+        elif enemy.rect.centery > player.rect.centery:
+            enemy.rect.centery -= speed          
 
         
 class Wall(pygame.sprite.Sprite):
@@ -654,7 +652,7 @@ for counter in range(1):
 pygame.display.set_caption("Game Game") #Setting caption at top to Game
 
 roomnumber = 1
-enemy = Enemy(100, 100)
+enemy = Enemy()
 enemy.rect.centerx = 100
 enemy.rect.centery = 100
 enemylist.add(enemy)
@@ -708,6 +706,10 @@ while not done:
     for player in playerlist:
          Player.moving()
          Player.newroomchange()
+
+    for enemeny in enemylist:
+         Enemy.move(1)
+         
          
 
 
@@ -763,11 +765,61 @@ while not done:
 
                 if rol == 1:
                     player.rect.right = wall.rect.left
+#==========================================================
+
+        if enemy.rect.left >= wall.rect.left and enemy.rect.right <= wall.rect.right:
+            if enemy.rect.bottom >= wall.rect.top and enemy.rect.top <= wall.rect.top:
+
+                
+                enemy.rect.bottom = wall.rect.top
+                
+                
+            if enemy.rect.top <= wall.rect.bottom and enemy.rect.bottom >= wall.rect.bottom:
+
+                
+                enemy.rect.top = wall.rect.bottom
+
+        elif enemy.rect.left <= wall.rect.right and enemy.rect.left >= wall.rect.left:
+            if enemy.rect.bottom >= wall.rect.top and enemy.rect.top <= wall.rect.top:
+
+                
+                enemy.rect.left = wall.rect.right
+                
+
+               
+                enemy.rect.bottom = wall.rect.top
+                
+            if enemy.rect.top <= wall.rect.bottom and enemy.rect.bottom >= wall.rect.bottom:
+                
+                
+                enemy.rect.left = wall.rect.right
+                    
+            if enemy.rect.top >= wall.rect.top and enemy.rect.bottom <=wall.rect.bottom:
+
+                
+                enemy.rect.left = wall.rect.right
+                              
+            
+        elif enemy.rect.right >= wall.rect.left and enemy.rect.right <= wall.rect.right:
+            if enemy.rect.bottom >= wall.rect.top and enemy.rect.top <= wall.rect.top:
+
+                
+                enemy.rect.right = wall.rect.left
+                
+                
+            if enemy.rect.top <= wall.rect.bottom and enemy.rect.bottom >= wall.rect.bottom:
+
+                
+                enemy.rect.right = wall.rect.left
+                
+                
+            if enemy.rect.top >= wall.rect.top and enemy.rect.bottom <=wall.rect.bottom:
+
+                
+                enemy.rect.right = wall.rect.left
 
 
 
-    
-    print(rooms, roomnumber)
 
 
 
