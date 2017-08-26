@@ -1,5 +1,6 @@
 import pygame
 import os
+import ctypes
 
 pygame.init()
 
@@ -10,6 +11,7 @@ GRAY = ( 128, 128, 128)       #----------------
 BROWN = (182, 155, 76)
 LIGHTBLUE = (78, 104, 183)
 WALLGREY = (93, 100, 51)
+DOOR = (139,69,19)
 
 enemylist = pygame.sprite.Group()
 walllist = pygame.sprite.Group()
@@ -83,7 +85,7 @@ class Player(pygame.sprite.Sprite):
             
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, health):  # initial position
+    def __init__(self):  # initial position
         super().__init__()
         self.image = pygame.image.load("enemy.png") #Load default image for enemy
         self.rect = self.image.get_rect()
@@ -266,6 +268,36 @@ def newrooms():
         wall = Wall(5, 175, WALLGREY)          #office verticle
         wall.rect.centerx = 240
         wall.rect.centery = 330
+        walllist.add(wall)
+
+        wall = Wall(50, 5, DOOR)              #office door right
+        wall.rect.centerx = 275
+        wall.rect.centery = 240
+        walllist.add(wall)
+
+        wall = Wall(50, 5, DOOR)          #office door left
+        wall.rect.centerx = 140
+        wall.rect.centery = 350
+        walllist.add(wall)
+
+        wall = Wall(100, 5, WALLGREY)              #office top left (left wall
+        wall.rect.centerx = 30
+        wall.rect.centery = 160
+        walllist.add(wall)
+
+        wall = Wall(25, 5, WALLGREY)          #office top left (right wall)
+        wall.rect.right = 162.5
+        wall.rect.centery = 160
+        walllist.add(wall)
+
+        wall = Wall(50, 5, WALLGREY)              #office top right (left wall)
+        wall.rect.right = 400
+        wall.rect.centery = 130
+        walllist.add(wall)
+
+        wall = Wall(125, 5, WALLGREY)          #office door right (right wall)
+        wall.rect.left = 162.5
+        wall.rect.centery = 130
         walllist.add(wall)
  
 #==============================================================================
@@ -637,6 +669,48 @@ def newrooms():
         wall.rect.centerx = 400
         wall.rect.centery = 400
         walllist.add(wall)
+        #===============================END
+
+        wall = Wall(75, 5, WALLGREY)                  # office horizontal
+        wall.rect.left = 30
+        wall.rect.centery = 162.5
+        walllist.add(wall)
+
+        wall = Wall(325, 30, WALLGREY)
+        wall.rect.centerx = 400
+        wall.rect.centery = 0
+        walllist.add(wall)
+
+        wall = Wall(325, 30, WALLGREY)
+        wall.rect.centerx = 0
+        wall.rect.centery = 400
+        walllist.add(wall)
+
+        wall = Wall(325, 30, WALLGREY)
+        wall.rect.centerx = 400
+        wall.rect.centery = 400
+        walllist.add(wall)
+
+        wall = Wall(30, 800, WALLGREY)
+        wall.rect.centerx = 0
+        wall.rect.centery = 0
+        walllist.add(wall)
+
+        wall = Wall(30, 325, WALLGREY)
+        wall.rect.centerx = 0
+        wall.rect.centery = 400
+        walllist.add(wall)
+
+        wall = Wall(30, 325, WALLGREY)
+        wall.rect.centerx = 400
+        wall.rect.centery = 0
+        walllist.add(wall)
+
+        wall = Wall(30, 325, WALLGREY)
+        wall.rect.centerx = 400
+        wall.rect.centery = 400
+        walllist.add(wall)
+        
 
 
 #===============================================================================================
@@ -656,6 +730,8 @@ enemy = Enemy()
 enemy.rect.centerx = 100
 enemy.rect.centery = 100
 enemylist.add(enemy)
+
+ctypes.windll.user32.MessageBoxW(0, "You have 1 life, 1 mission. Find a way out", "Welcome to 9tmare", 1)
 #===============================================================================================
 #------------------------------------------Game Loop--------------------------------------------
 #===============================================================================================
