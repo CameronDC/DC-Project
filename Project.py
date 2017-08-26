@@ -16,7 +16,7 @@ DOOR = (139,69,19)
 enemylist = pygame.sprite.Group()
 walllist = pygame.sprite.Group()
 playerlist = pygame.sprite.Group() #putting player in its own list
-screen= pygame.display.set_mode((400, 400))#Screen size
+screen= pygame.display.set_mode((800, 800))#Screen size
 keypress = pygame.key.get_pressed() 
 rol = 0 #right or left setting to 0
 uod = 0 # setting up or down to 0
@@ -67,18 +67,18 @@ class Player(pygame.sprite.Sprite):
         def newroomchange():
             
             if player.rect.bottom <= 0:
-                player.rect.bottom = 400
+                player.rect.bottom = 800
                 rooms[1] = rooms[1] + 1
                 player.roomchange = 1
-            if player.rect.top >= 400:
+            if player.rect.top >= 800:
                 player.rect.top = 0
                 rooms[1] = rooms[1] - 1
                 player.roomchange = 1
             if player.rect.right <= 0:
-                player.rect.right = 400
+                player.rect.right = 800
                 rooms[0] = rooms[0] - 1
                 player.roomchange = 1
-            if player.rect.left >= 400:
+            if player.rect.left >= 800:
                 player.rect.left = 0
                 rooms[0] = rooms[0] + 1
                 player.roomchange = 1
@@ -150,44 +150,44 @@ def newrooms():
     if roomnumber == 1:
 
         #===========================DEFAULT WALLS
-        wall = Wall(325, 30, LIGHTBLUE)
+        wall = Wall(650, 30, LIGHTBLUE)
         wall.rect.centerx = 0
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
-        wall.rect.centerx = 400
+        wall = Wall(650, 30, LIGHTBLUE)
+        wall.rect.centerx = 800
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
+        wall = Wall(650, 30, LIGHTBLUE)
         wall.rect.centerx = 0
-        wall.rect.centery = 400
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
-        wall.rect.centerx = 400
-        wall.rect.centery = 400
+        wall = Wall(650, 30, LIGHTBLUE)
+        wall.rect.centerx = 800
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
+        wall = Wall(30, 650, LIGHTBLUE)
         wall.rect.centerx = 0
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
+        wall = Wall(30, 650, LIGHTBLUE)
         wall.rect.centerx = 0
-        wall.rect.centery = 400
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
-        wall.rect.centerx = 400
+        wall = Wall(30, 650, LIGHTBLUE)
+        wall.rect.centerx = 800
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
-        wall.rect.centerx = 400
-        wall.rect.centery = 400
+        wall = Wall(30, 650, LIGHTBLUE)
+        wall.rect.centerx = 800
+        wall.rect.centery = 800
         walllist.add(wall)
 
         #=============================END
@@ -207,48 +207,50 @@ def newrooms():
 #==============================================================================
     if roomnumber == 2:
 
-        #==============================DEFAULT WALLS
-        wall = Wall(800, 30, LIGHTBLUE)
+        #===========================DEFAULT WALLS
+        wall = Wall(1100, 30, LIGHTBLUE)
         wall.rect.centerx = 0
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
-        wall.rect.centerx = 400
+        wall = Wall(650, 30, LIGHTBLUE)
+        wall.rect.centerx = 800
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
+        wall = Wall(650, 30, LIGHTBLUE)
         wall.rect.centerx = 0
-        wall.rect.centery = 400
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
-        wall.rect.centerx = 400
-        wall.rect.centery = 400
+        wall = Wall(650, 30, LIGHTBLUE)
+        wall.rect.centerx = 800
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
+        wall = Wall(30, 650, LIGHTBLUE)
         wall.rect.centerx = 0
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
+        wall = Wall(30, 650, LIGHTBLUE)
         wall.rect.centerx = 0
-        wall.rect.centery = 400
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
-        wall.rect.centerx = 400
+        wall = Wall(30, 650, LIGHTBLUE)
+        wall.rect.centerx = 800
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
-        wall.rect.centerx = 400
-        wall.rect.centery = 400
+        wall = Wall(30, 650, LIGHTBLUE)
+        wall.rect.centerx = 800
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        #================================= END
+        #=============================END
+
+
 
         wall = Wall(5, 285, WALLGREY)            #Long Wall
         wall.rect.centerx = 162.5
@@ -312,46 +314,48 @@ def newrooms():
 #==============================================================================
     if roomnumber == 3:
 
-        #==============================DEFAULT WALLS
-        wall = Wall(800, 30, LIGHTBLUE)
+        #===========================DEFAULT WALLS
+        wall = Wall(1100, 30, LIGHTBLUE)
         wall.rect.centerx = 0
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
-        wall.rect.centerx = 400
+        wall = Wall(650, 30, LIGHTBLUE)
+        wall.rect.centerx = 800
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
+        wall = Wall(650, 30, LIGHTBLUE)
         wall.rect.centerx = 0
-        wall.rect.centery = 400
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
-        wall.rect.centerx = 400
-        wall.rect.centery = 400
+        wall = Wall(650, 30, LIGHTBLUE)
+        wall.rect.centerx = 800
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
+        wall = Wall(30, 650, LIGHTBLUE)
         wall.rect.centerx = 0
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
+        wall = Wall(30, 650, LIGHTBLUE)
         wall.rect.centerx = 0
-        wall.rect.centery = 400
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(30, 800, LIGHTBLUE)
-        wall.rect.centerx = 400
+        wall = Wall(30, 650, LIGHTBLUE)
+        wall.rect.centerx = 800
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
-        wall.rect.centerx = 400
-        wall.rect.centery = 400
+        wall = Wall(30, 1100, LIGHTBLUE)
+        wall.rect.centerx = 800
+        wall.rect.centery = 800
         walllist.add(wall)
+
+        #=============================END
 
 #==============================================================================
 #      ________  ________  ________  _____ ______         ___   ___           #
@@ -365,46 +369,48 @@ def newrooms():
 #==============================================================================
     if roomnumber == 4:
  
-        #==============================DEFAULT WALLS
-        wall = Wall(325, 30, LIGHTBLUE)
+                #===========================DEFAULT WALLS
+        wall = Wall(650, 30, LIGHTBLUE)
         wall.rect.centerx = 0
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
-        wall.rect.centerx = 400
+        wall = Wall(650, 30, LIGHTBLUE)
+        wall.rect.centerx = 800
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
+        wall = Wall(650, 30, LIGHTBLUE)
         wall.rect.centerx = 0
-        wall.rect.centery = 400
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
-        wall.rect.centerx = 400
-        wall.rect.centery = 400
+        wall = Wall(650, 30, LIGHTBLUE)
+        wall.rect.centerx = 800
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
+        wall = Wall(30, 650, LIGHTBLUE)
         wall.rect.centerx = 0
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
+        wall = Wall(30, 650, LIGHTBLUE)
         wall.rect.centerx = 0
-        wall.rect.centery = 400
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(30, 800, LIGHTBLUE)
-        wall.rect.centerx = 400
+        wall = Wall(30, 650, LIGHTBLUE)
+        wall.rect.centerx = 800
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
-        wall.rect.centerx = 400
-        wall.rect.centery = 400
+        wall = Wall(30, 1100, LIGHTBLUE)
+        wall.rect.centerx = 800
+        wall.rect.centery = 800
         walllist.add(wall)
+
+        #=============================END
 
 #==============================================================================
 #      ________  ________  ________  _____ ______            |\   ____\        #
@@ -418,46 +424,48 @@ def newrooms():
 #==============================================================================
     if roomnumber == 5:
 
-        #==============================DEFAULT WALLS
-        wall = Wall(325, 30, LIGHTBLUE)
+                #===========================DEFAULT WALLS
+        wall = Wall(650, 30, LIGHTBLUE)
         wall.rect.centerx = 0
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
-        wall.rect.centerx = 400
+        wall = Wall(650, 30, LIGHTBLUE)
+        wall.rect.centerx = 800
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(800, 30, LIGHTBLUE)
+        wall = Wall(1100, 30, LIGHTBLUE)
         wall.rect.centerx = 0
-        wall.rect.centery = 400
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
-        wall.rect.centerx = 400
-        wall.rect.centery = 400
+        wall = Wall(650, 30, LIGHTBLUE)
+        wall.rect.centerx = 800
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
+        wall = Wall(30, 650, LIGHTBLUE)
         wall.rect.centerx = 0
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
+        wall = Wall(30, 650, LIGHTBLUE)
         wall.rect.centerx = 0
-        wall.rect.centery = 400
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(30, 800, LIGHTBLUE)
-        wall.rect.centerx = 400
+        wall = Wall(30, 650, LIGHTBLUE)
+        wall.rect.centerx = 800
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
-        wall.rect.centerx = 400
-        wall.rect.centery = 400
+        wall = Wall(30, 1100, LIGHTBLUE)
+        wall.rect.centerx = 800
+        wall.rect.centery = 800
         walllist.add(wall)
+
+        #=============================END
 
 #==============================================================================
 #      ________  ________  ________  _____ ______             ________         #
@@ -471,46 +479,48 @@ def newrooms():
 #==============================================================================
     if roomnumber == 6:
 
-        #==============================DEFAULT WALLS
-        wall = Wall(325, 30, LIGHTBLUE)
+                #===========================DEFAULT WALLS
+        wall = Wall(650, 30, LIGHTBLUE)
         wall.rect.centerx = 0
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
-        wall.rect.centerx = 400
+        wall = Wall(650, 30, LIGHTBLUE)
+        wall.rect.centerx = 800
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(800, 30, LIGHTBLUE)
+        wall = Wall(1100, 30, LIGHTBLUE)
         wall.rect.centerx = 0
-        wall.rect.centery = 400
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
-        wall.rect.centerx = 400
-        wall.rect.centery = 400
+        wall = Wall(650, 30, LIGHTBLUE)
+        wall.rect.centerx = 800
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
+        wall = Wall(30, 650, LIGHTBLUE)
         wall.rect.centerx = 0
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
+        wall = Wall(30, 650, LIGHTBLUE)
         wall.rect.centerx = 0
-        wall.rect.centery = 400
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
-        wall.rect.centerx = 400
+        wall = Wall(30, 650, LIGHTBLUE)
+        wall.rect.centerx = 800
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
-        wall.rect.centerx = 400
-        wall.rect.centery = 400
+        wall = Wall(30, 650, LIGHTBLUE)
+        wall.rect.centerx = 800
+        wall.rect.centery = 800
         walllist.add(wall)
+
+        #=============================END
 #==============================================================================
 #      ________  ________  ________  _____ ______           ________           #
 #     |\   __  \|\   __  \|\   __  \|\   _ \  _   \        |\_____  \          #
@@ -523,46 +533,48 @@ def newrooms():
 #==============================================================================
     if roomnumber == 7:
 
-        #==============================DEFAULT WALLS
-        wall = Wall(325, 30, LIGHTBLUE)
+               #===========================DEFAULT WALLS
+        wall = Wall(650, 30, LIGHTBLUE)
         wall.rect.centerx = 0
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
-        wall.rect.centerx = 400
+        wall = Wall(650, 30, LIGHTBLUE)
+        wall.rect.centerx = 800
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(800, 30, LIGHTBLUE)
+        wall = Wall(1100, 30, LIGHTBLUE)
         wall.rect.centerx = 0
-        wall.rect.centery = 400
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
-        wall.rect.centerx = 400
-        wall.rect.centery = 400
+        wall = Wall(650, 30, LIGHTBLUE)
+        wall.rect.centerx = 800
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(30, 800, LIGHTBLUE)
+        wall = Wall(30, 650, LIGHTBLUE)
         wall.rect.centerx = 0
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(30, 800, LIGHTBLUE)
+        wall = Wall(30, 1100, LIGHTBLUE)
         wall.rect.centerx = 0
-        wall.rect.centery = 400
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
-        wall.rect.centerx = 400
+        wall = Wall(30, 650, LIGHTBLUE)
+        wall.rect.centerx = 800
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
-        wall.rect.centerx = 400
-        wall.rect.centery = 400
+        wall = Wall(30, 650, LIGHTBLUE)
+        wall.rect.centerx = 800
+        wall.rect.centery = 800
         walllist.add(wall)
+
+        #=============================END
 
 #==============================================================================
 #      ________  ________  ________  _____ ______           ________           #
@@ -576,46 +588,48 @@ def newrooms():
 #==============================================================================
     if roomnumber == 8:
 
-        #==============================DEFAULT WALLS
-        wall = Wall(325, 30, LIGHTBLUE)
+                #===========================DEFAULT WALLS
+        wall = Wall(650, 30, LIGHTBLUE)
         wall.rect.centerx = 0
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
-        wall.rect.centerx = 400
+        wall = Wall(650, 30, LIGHTBLUE)
+        wall.rect.centerx = 800
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
+        wall = Wall(650, 30, LIGHTBLUE)
         wall.rect.centerx = 0
-        wall.rect.centery = 400
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
-        wall.rect.centerx = 400
-        wall.rect.centery = 400
+        wall = Wall(650, 30, LIGHTBLUE)
+        wall.rect.centerx = 800
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(30, 700, LIGHTBLUE)
+        wall = Wall(30, 650, LIGHTBLUE)
         wall.rect.centerx = 0
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
+        wall = Wall(30, 1100, LIGHTBLUE)
         wall.rect.centerx = 0
-        wall.rect.centery = 400
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
-        wall.rect.centerx = 400
+        wall = Wall(30, 650, LIGHTBLUE)
+        wall.rect.centerx = 800
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
-        wall.rect.centerx = 400
-        wall.rect.centery = 400
+        wall = Wall(30, 650, LIGHTBLUE)
+        wall.rect.centerx = 800
+        wall.rect.centery = 800
         walllist.add(wall)
+
+        #=============================END
 
 #==============================================================================
 #      ________  ________  ________  _____ ______           ________          #
@@ -629,47 +643,49 @@ def newrooms():
 #==============================================================================
     if roomnumber == 9:
 
-        #==============================DEFAULT WALLS
-        wall = Wall(800, 30, LIGHTBLUE)
+                #===========================DEFAULT WALLS
+        wall = Wall(1100, 30, LIGHTBLUE)
         wall.rect.centerx = 0
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
-        wall.rect.centerx = 400
+        wall = Wall(650, 30, LIGHTBLUE)
+        wall.rect.centerx = 800
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
+        wall = Wall(1100, 30, LIGHTBLUE)
         wall.rect.centerx = 0
-        wall.rect.centery = 400
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(325, 30, LIGHTBLUE)
-        wall.rect.centerx = 400
-        wall.rect.centery = 400
+        wall = Wall(650, 30, LIGHTBLUE)
+        wall.rect.centerx = 800
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(30, 800, LIGHTBLUE)
+        wall = Wall(30, 650, LIGHTBLUE)
         wall.rect.centerx = 0
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
+        wall = Wall(30, 650, LIGHTBLUE)
         wall.rect.centerx = 0
-        wall.rect.centery = 400
+        wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
-        wall.rect.centerx = 400
+        wall = Wall(30, 650, LIGHTBLUE)
+        wall.rect.centerx = 800
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(30, 325, LIGHTBLUE)
-        wall.rect.centerx = 400
-        wall.rect.centery = 400
+        wall = Wall(30, 650, LIGHTBLUE)
+        wall.rect.centerx = 800
+        wall.rect.centery = 800
         walllist.add(wall)
-        #===============================END
+
+        #=============================END
+
 
         wall = Wall(75, 5, WALLGREY)                  # office horizontal
         wall.rect.left = 30
