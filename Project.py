@@ -31,7 +31,7 @@ rooms = [0, 0]
 
 class Player(pygame.sprite.Sprite):
         def __init__(self, health, zero, damage):
-            self.health = health        #Creating attributes of PLAYER to be used later in game
+            self.health = health        #Creating attributes of PLAYER --to be used later in game
             self.velocityx = zero       #                         v
             self.velocityy = zero       #                         v
             self.damage = damage
@@ -99,7 +99,24 @@ class Enemy(pygame.sprite.Sprite):
         if enemy.rect.centery < player.rect.centery:
             enemy.rect.centery += speed
         elif enemy.rect.centery > player.rect.centery:
-            enemy.rect.centery -= speed          
+            enemy.rect.centery -= speed
+
+class Enemy2(pygame.sprite.Sprite):
+    def __init__(self):  # initial position
+        super().__init__()
+        self.image = pygame.image.load("enemy.png") #Load default image for enemy
+        self.rect = self.image.get_rect()
+    def move(speed): 
+        # Movement along x direction
+        if enemy2.rect.centerx > player.rect.centerx:
+            enemy2.rect.centerx -= speed
+        elif enemy2.rect.centerx < player.rect.centerx:
+            enemy2.rect.centerx += speed
+        # Movement along y direction
+        if enemy2.rect.centery < player.rect.centery:
+            enemy2.rect.centery += speed
+        elif enemy2.rect.centery > player.rect.centery:
+            enemy2.rect.centery -= speed  
 
         
 class Wall(pygame.sprite.Sprite):
@@ -252,54 +269,54 @@ def newrooms():
 
 
 
-        wall = Wall(5, 285, WALLGREY)            #Long Wall
-        wall.rect.centerx = 162.5
-        wall.rect.bottom = 300
+        wall = Wall(5, 590, WALLGREY)            #Long Wall
+        wall.rect.centerx = 326
+        wall.rect.bottom = 600
         walllist.add(wall)
 
-        wall = Wall(5, 175, WALLGREY)            #Short wall
-        wall.rect.centerx = 162.5
-        wall.rect.centery = 440
+        wall = Wall(5, 344, WALLGREY)            #Short wall
+        wall.rect.centerx = 326
+        wall.rect.centery = 850
         walllist.add(wall)
 
-        wall = Wall(175, 5, WALLGREY)          #office horizontal
-        wall.rect.centerx = 325
-        wall.rect.centery = 240
+        wall = Wall(350, 5, WALLGREY)          #office horizontal
+        wall.rect.centerx = 650
+        wall.rect.centery = 477
         walllist.add(wall)
 
-        wall = Wall(5, 175, WALLGREY)          #office verticle
-        wall.rect.centerx = 240
-        wall.rect.centery = 330
+        wall = Wall(5, 320, WALLGREY)          #office verticle
+        wall.rect.centerx = 477
+        wall.rect.bottom = 800
         walllist.add(wall)
 
-        wall = Wall(50, 5, DOOR)              #office door right
-        wall.rect.centerx = 275
-        wall.rect.centery = 240
+        wall = Wall(100, 5, DOOR)              #office door right
+        wall.rect.centerx = 550
+        wall.rect.centery = 477
         walllist.add(wall)
 
-        wall = Wall(50, 5, DOOR)          #office door left
-        wall.rect.centerx = 140
-        wall.rect.centery = 350
+        wall = Wall(100, 5, DOOR)          #office door left
+        wall.rect.centerx = 279
+        wall.rect.centery = 675
         walllist.add(wall)
 
-        wall = Wall(100, 5, WALLGREY)              #office top left (left wall
-        wall.rect.centerx = 30
-        wall.rect.centery = 160
+        wall = Wall(160, 5, WALLGREY)              #office top left (left wall)
+        wall.rect.centerx = 90
+        wall.rect.centery = 322.5
         walllist.add(wall)
 
-        wall = Wall(25, 5, WALLGREY)          #office top left (right wall)
-        wall.rect.right = 162.5
-        wall.rect.centery = 160
+        wall = Wall(100, 5, WALLGREY)          #office top left (right wall)
+        wall.rect.right = 325
+        wall.rect.centery = 322.5
         walllist.add(wall)
 
-        wall = Wall(50, 5, WALLGREY)              #office top right (left wall)
-        wall.rect.right = 400
-        wall.rect.centery = 130
+        wall = Wall(100, 5, WALLGREY)              #office top right (left wall)
+        wall.rect.right = 800
+        wall.rect.centery = 260
         walllist.add(wall)
 
-        wall = Wall(125, 5, WALLGREY)          #office door right (right wall)
-        wall.rect.left = 162.5
-        wall.rect.centery = 130
+        wall = Wall(250, 5, WALLGREY)          #office door right (right wall)
+        wall.rect.left = 325
+        wall.rect.centery = 260
         walllist.add(wall)
  
 #==============================================================================
@@ -654,7 +671,7 @@ def newrooms():
         wall.rect.centery = 0
         walllist.add(wall)
 
-        wall = Wall(1100, 30, LIGHTBLUE)
+        wall = Wall(650, 30, LIGHTBLUE)
         wall.rect.centerx = 0
         wall.rect.centery = 800
         walllist.add(wall)
@@ -664,7 +681,7 @@ def newrooms():
         wall.rect.centery = 800
         walllist.add(wall)
 
-        wall = Wall(30, 650, LIGHTBLUE)
+        wall = Wall(30, 1100, LIGHTBLUE)
         wall.rect.centerx = 0
         wall.rect.centery = 0
         walllist.add(wall)
@@ -687,46 +704,51 @@ def newrooms():
         #=============================END
 
 
-        wall = Wall(75, 5, WALLGREY)                  # office horizontal
-        wall.rect.left = 30
-        wall.rect.centery = 162.5
+        wall = Wall(100, 5, WALLGREY)                  # office horizontal
+        wall.rect.right = 800
+        wall.rect.centery = 200
         walllist.add(wall)
 
-        wall = Wall(325, 30, WALLGREY)
-        wall.rect.centerx = 400
-        wall.rect.centery = 0
+        wall = Wall(100, 5, WALLGREY)                  # office horizontal
+        wall.rect.right = 650
+        wall.rect.centery = 200
         walllist.add(wall)
 
-        wall = Wall(325, 30, WALLGREY)
-        wall.rect.centerx = 0
-        wall.rect.centery = 400
+        wall = Wall(100, 5, WALLGREY)                  # office horizontal
+        wall.rect.right = 550
+        wall.rect.centery = 200
         walllist.add(wall)
 
-        wall = Wall(325, 30, WALLGREY)
-        wall.rect.centerx = 400
-        wall.rect.centery = 400
+        wall = Wall(100, 5, WALLGREY)                  # office horizontal
+        wall.rect.right = 400
+        wall.rect.centery = 200
         walllist.add(wall)
 
-        wall = Wall(30, 800, WALLGREY)
-        wall.rect.centerx = 0
-        wall.rect.centery = 0
+        wall = Wall(100, 5, WALLGREY)                  # office horizontal
+        wall.rect.right = 300
+        wall.rect.centery = 200
         walllist.add(wall)
 
-        wall = Wall(30, 325, WALLGREY)
-        wall.rect.centerx = 0
-        wall.rect.centery = 400
+        wall = Wall(100, 5, WALLGREY)                  # office horizontal
+        wall.rect.right = 150
+        wall.rect.centery = 200
         walllist.add(wall)
 
-        wall = Wall(30, 325, WALLGREY)
-        wall.rect.centerx = 400
-        wall.rect.centery = 0
+
+        wall = Wall(5, 200, WALLGREY)
+        wall.rect.centerx = 550
+        wall.rect.top = 0
         walllist.add(wall)
 
-        wall = Wall(30, 325, WALLGREY)
-        wall.rect.centerx = 400
-        wall.rect.centery = 400
+        wall = Wall(5, 200, WALLGREY)
+        wall.rect.centerx = 300
+        wall.rect.top = 0
         walllist.add(wall)
-        
+
+        wall = Wall(5, 200, WALLGREY)
+        wall.rect.centerx = 100
+        wall.rect.top = 0
+        walllist.add(wall)
 
 
 #===============================================================================================
@@ -746,6 +768,11 @@ enemy = Enemy()
 enemy.rect.centerx = 100
 enemy.rect.centery = 100
 enemylist.add(enemy)
+
+enemy2 = Enemy2()
+enemy.rect.centerx = 700
+enemy.rect.centery = 700
+enemylist.add(enemy2)
 
 ctypes.windll.user32.MessageBoxW(0, "You have 1 life, 1 mission. Find a way out", "Welcome to 9tmare", 1)
 #===============================================================================================
@@ -801,8 +828,9 @@ while not done:
 
     for enemeny in enemylist:
          Enemy.move(1)
-         
-         
+
+    for enemy2 in enemylist:
+        Enemy2.move(1)         
 
 
     for wall in walllist:
@@ -909,6 +937,77 @@ while not done:
 
                 
                 enemy.rect.right = wall.rect.left
+
+
+
+
+
+
+        if enemy2.rect.left >= wall.rect.left and enemy2.rect.right <= wall.rect.right:
+            if enemy2.rect.bottom >= wall.rect.top and enemy2.rect.top <= wall.rect.top:
+
+                
+                enemy2.rect.bottom = wall.rect.top
+                
+                
+            if enemy2.rect.top <= wall.rect.bottom and enemy2.rect.bottom >= wall.rect.bottom:
+
+                
+                enemy.rect.top = wall.rect.bottom
+
+        elif enemy2.rect.left <= wall.rect.right and enemy2.rect.left >= wall.rect.left:
+            if enemy2.rect.bottom >= wall.rect.top and enemy2.rect.top <= wall.rect.top:
+
+                
+                enemy2.rect.left = wall.rect.right
+                
+
+               
+                enemy2.rect.bottom = wall.rect.top
+                
+            if enemy2.rect.top <= wall.rect.bottom and enemy2.rect.bottom >= wall.rect.bottom:
+                
+                
+                enemy2.rect.left = wall.rect.right
+                    
+            if enemy2.rect.top >= wall.rect.top and enemy2.rect.bottom <=wall.rect.bottom:
+
+                
+                enemy2.rect.left = wall.rect.right
+                              
+            
+        elif enemy2.rect.right >= wall.rect.left and enemy2.rect.right <= wall.rect.right:
+            if enemy2.rect.bottom >= wall.rect.top and enemy2.rect.top <= wall.rect.top:
+
+                
+                enemy2.rect.right = wall.rect.left
+                
+                
+            if enemy2.rect.top <= wall.rect.bottom and enemy2.rect.bottom >= wall.rect.bottom:
+
+                
+                enemy2.rect.right = wall.rect.left
+                
+                
+            if enemy2.rect.top >= wall.rect.top and enemy2.rect.bottom <=wall.rect.bottom:
+
+                
+                enemy2.rect.right = wall.rect.left
+
+
+
+        if enemy.rect.centerx == player.rect.centerx and enemy.rect.centery == player.rect.centery:
+
+                player.roomnumber = 1
+                player.roomchange = 1
+                roomnumber = 1
+                player.rect.centerx = 137 
+                player.rect.centery = 137
+                enemy.rect.centerx = 700 
+                enemy.rect.centery = 700
+                enemy2.rect.centerx = 100 
+                enemy2.rect.centery = 100
+                
 
 
 
