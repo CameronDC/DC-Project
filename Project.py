@@ -14,19 +14,19 @@ WALLGREY = (93, 100, 51)
 DOOR = (139,69,19)
 
 block_list = pygame.sprite.Group()
-all_sprites_list = pygame.sprite.Group()
-bullet_list = pygame.sprite.Group()
-imagelist = pygame.sprite.Group()
-enemylist = pygame.sprite.Group()
-walllist = pygame.sprite.Group()
+all_sprites_list = pygame.sprite.Group() # a list for all the sprites within the gaem
+bullet_list = pygame.sprite.Group() # list for the bullets
+imagelist = pygame.sprite.Group() # images which dont act as a wall list
+enemylist = pygame.sprite.Group() # list for the enemies
+walllist = pygame.sprite.Group() # list for the walls
 playerlist = pygame.sprite.Group() #putting player in its own list
 screen= pygame.display.set_mode((800, 800))#Screen size
 keypress = pygame.key.get_pressed() 
 rol = 0 #right or left setting to 0
 uod = 0 # setting up or down to 0
 score = 0
-myfont = pygame.font.SysFont("monospace", 30)
-key = 0
+myfont = pygame.font.SysFont("monospace", 30) # set font for the game
+key = 0 # flag type attribute for if key has been collected
 
 clock = pygame.time.Clock() #taking the pygame clock
 RC = 1
@@ -73,7 +73,7 @@ class Player(pygame.sprite.Sprite):
             player.rect.centery = player.rect.centery + player.velocityy
 
 
-        def newroomchange():
+        def newroomchange():              # has the player left the boundaries of the map? 800 x 800 map, if so set room to change
             
             if player.rect.bottom <= 0:
                 player.rect.bottom = 800
@@ -93,9 +93,8 @@ class Player(pygame.sprite.Sprite):
                 player.roomchange = 1
 
         def update(self):
-        #""" Update the player's position. """
+        # Update the player's position
         # Get the current mouse position. This returns the position
-        # as a list of two numbers.
             pos = pygame.mouse.get_pos()
 
             
@@ -120,7 +119,7 @@ class Enemy(pygame.sprite.Sprite):
 class Enemy2(pygame.sprite.Sprite):
     def __init__(self):  # initial position
         super().__init__()
-        self.image = pygame.image.load("enemy.png") #Load default image for enemy
+        self.image = pygame.image.load("enemy.png") #Load default image for enemy No 2
         self.rect = self.image.get_rect()
     def move(speed): 
         # Movement along x direction
@@ -135,7 +134,7 @@ class Enemy2(pygame.sprite.Sprite):
             enemy2.rect.centery -= speed  
 
         
-class Wall(pygame.sprite.Sprite):
+class Wall(pygame.sprite.Sprite):                        #wall def, used for all wall in the game
 
     def __init__(self, width, height, colour ):
         self.colour = colour
@@ -143,6 +142,10 @@ class Wall(pygame.sprite.Sprite):
         self.image = pygame.Surface([width, height])
         self.image.fill(self.colour)
         self.rect = self.image.get_rect()
+
+ #-------------------------------------------------------------------------------------
+ # THE FOLLOWING DEFENITIONS ARE VARIABLES OF WALLS IN WHICH DIFFERENT IMAGES ARE USED
+ #-------------------------------------------------------------------------------------
 
 class Bench(pygame.sprite.Sprite):
 
@@ -208,13 +211,13 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.y -= 3
  
 
-def Score():
+def Score():         # Pretty simply a score
         message_display(score)
         
 #image = Image()
-enemy = Enemy()
-enemy2 = Enemy2()    
-def newrooms():
+enemy = Enemy()   #assingment
+enemy2 = Enemy2()    #assingment
+def newrooms():              #location of rooms called from Rooms() and locations of enemies
     if rooms == [-1,1]:
             roomnumber = 9
     if rooms[0] == 0 and rooms[1] == 1:
@@ -242,7 +245,7 @@ def newrooms():
             enemylist.add(enemy2)
             
 
-    if rooms[0] == 0 and rooms[1] == 0:
+    if rooms[0] == 0 and rooms[1] == 0:     # determin9ing the room in which the player is
             roomnumber = 1
     if rooms == [1, 0]:
             roomnumber = 4
@@ -1055,9 +1058,9 @@ while not done:
     if player.roomchange == 1:
             enemylist.remove(enemy2)
             
-    for wall in walllist:
-        if player.rect.left >= wall.rect.left and player.rect.right <= wall.rect.right:
-            if player.rect.bottom >= wall.rect.top and player.rect.top <= wall.rect.top:
+    for wall in walllist:                                                                                 #========================================================================================
+        if player.rect.left >= wall.rect.left and player.rect.right <= wall.rect.right:                   # THE FOLLOWING IS CHECKING WHETHER OR NOT THE PLAYER OR ENEMYIES LOCATION IS EQUAL TO ONE OF THE WALLS
+            if player.rect.bottom >= wall.rect.top and player.rect.top <= wall.rect.top:                  # IN WHICH CASE, VELOCITY IS SET TO 0 AND THE PLAYER OR ENEMY IS UNABLE TO MOVE 
 
                 if uod == 2:
                     player.rect.bottom = wall.rect.top
@@ -1162,17 +1165,17 @@ while not done:
                 enemy.rect.right = wall.rect.left
 
 
-
+                                                                                                                         #END
 
 
         if enemy.rect.centerx == player.rect.centerx and enemy.rect.centery == player.rect.centery or enemy2.rect.centerx == player.rect.centerx and enemy2.rect.centery == player.rect.centery:
 
-                player.roomchange = 1
+                player.roomchange = 1                   #is the player and the enemy is the same position, if so increase deaths, set postion back to origional and start screen
                 rooms = [0,0]
                 player.rect.centerx = 137 
                 player.rect.centery = 137
                 score = score + 1
-
+                key = 0
 
 
 
