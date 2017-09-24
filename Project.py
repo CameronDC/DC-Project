@@ -1,9 +1,11 @@
 import pygame
 import os
 import ctypes
+from time import sleep
 
 pygame.init()
 
+BLACK = (0, 0, 0)
 RED = (255,0,0)               #Definign Colours
 GREEN = (0, 255, 0)           #       v
 BLUE = (0, 0, 255)            #       v
@@ -13,6 +15,7 @@ LIGHTBLUE = (78, 104, 183)
 WALLGREY = (93, 100, 51)
 DOOR = (139,69,19)
 
+bullet_hit_list = pygame.sprite.Group()
 block_list = pygame.sprite.Group()
 all_sprites_list = pygame.sprite.Group() # a list for all the sprites within the gaem
 bullet_list = pygame.sprite.Group() # list for the bullets
@@ -25,6 +28,7 @@ keypress = pygame.key.get_pressed()
 rol = 0 #right or left setting to 0
 uod = 0 # setting up or down to 0
 score = 0
+deaths = 99
 myfont = pygame.font.SysFont("monospace", 30) # set font for the game
 key = 0 # flag type attribute for if key has been collected
 
@@ -47,26 +51,36 @@ class Player(pygame.sprite.Sprite):
             super().__init__()
             self.image = pygame.image.load("N.png") #Load default image for player
             self.rect = self.image.get_rect()
+            self.direction=100
 
         def facing(rol, uod):
             if keypress[pygame.K_RIGHT]:#Determining the durection of user (If Right AND....
                 if keypress[pygame.K_UP]: #If Right and up 
                     player.image = pygame.image.load("NE.png") #Change player image to NE.png
+                    player.direction=2
                 elif keypress[pygame.K_DOWN]: #If right and down
                     player.image = pygame.image.load("SE.png") #Change player image to SE.png
+                    player.direction=4
                 else: #If it isnt up or down or left then it must be right which is East
                     player.image = pygame.image.load("E.png") #change player image to E.png
+                    player.direction=3
             elif keypress[pygame.K_LEFT]: #Same system with the left side of the compass
                 if keypress[pygame.K_UP]: #If left and up
                     player.image = pygame.image.load("NW.png") #Change player image to NW.png
+                    player.direction=8
                 elif keypress[pygame.K_DOWN]: #If left and down
                     player.image = pygame.image.load("SW.png") #Change player image to SW.png
+                    player.direction=6
                 else: #If it isnt up or down or right then it must be left which is West
                     player.image = pygame.image.load("W.png") #Change player image to W.png
+                    player.direction=7
             elif keypress[pygame.K_DOWN]:                  #Is it north or south and changing
                 player.image = pygame.image.load("S.png")  #              Image
+                player.direction=5
             else:                                          #                v
-                player.image = pygame.image.load("N.png")  #---------------------------------
+                player.image = pygame.image.load("N.png")
+                player.direction=1
+                #---------------------------------
                 
         def moving(): #Moving function consisting of direction + the determined velocity.
             player.rect.centerx = player.rect.centerx + player.velocityx
@@ -195,26 +209,82 @@ class Image(pygame.sprite.Sprite):
         self.image = pygame.image.load("download.png")
         self.rect = self.image.get_rect()
 
+class Floor(pygame.sprite.Sprite):
+
+    def __init__(self, width, height):
+        
+        super().__init__()
+        self.image = pygame.image.load("floor.jpg")
+        self.rect = self.image.get_rect()
+
+
+
+
+
+
 class Bullet(pygame.sprite.Sprite):
     """ This class represents the bullet . """
-    def __init__(self):
+    def __init__(self, player_x, player_y, player_direction):
         # Call the parent class (Sprite) constructor
         super().__init__()
  
-        self.image = pygame.Surface([4, 10])
-        self.image.fill(RED)
- 
+        self.image = pygame.Surface([3, 3])
+        self.image.fill(BLACK)
         self.rect = self.image.get_rect()
- 
-    def update(self):
-        """ Move the bullet. """
-        self.rect.y -= 3
+        self.rect.x=player_x
+        self.rect.y=player_y
+        #self.direction=player_direction
+
+    def move(self):
+        if player.direction==1:
+            self.rect.y-=8
+        if player.direction==2:
+            self.rect.x+=8
+            self.rect.y-=8
+        if player.direction==3:
+            self.rect.x+=8
+        if player.direction==4:
+            self.rect.x+=8
+            self.rect.y+=8
+        if player.direction==5:
+            self.rect.y+=8
+        if player.direction==6:
+            self.rect.x-=8
+            self.rect.y+=8
+        if player.direction==7:
+            self.rect.x-=8
+        if player.direction==8:
+            self.rect.x-=8
+            self.rect.y-=8
+
+    ##def MakeBullet()
+        
+        
+
+
+
+
+
+
+
+#Searchable locations:
+class Box(pygame.sprite.Sprite):
+
+    def __init__(self, width, height):
+        
+        super().__init__()
+        self.image = pygame.image.load("box.png")
+        self.rect = self.image.get_rect()
  
 
 def Score():         # Pretty simply a score
         message_display(score)
+
+def Deaths():         # Pretty simply a score
+        message_display(deaths)
         
 #image = Image()
+
 enemy = Enemy()   #assingment
 enemy2 = Enemy2()    #assingment
 def newrooms():              #location of rooms called from Rooms() and locations of enemies
@@ -224,8 +294,8 @@ def newrooms():              #location of rooms called from Rooms() and location
             print("triggered")
             roomnumber = 2
             enemy2 = Enemy2()
-            enemy.rect.centerx = 700
-            enemy.rect.centery = 700
+            enemy2.rect.centerx = 700
+            enemy2.rect.centery = 700
             enemylist.add(enemy2)
 
     if rooms == [1,1]:
@@ -239,10 +309,10 @@ def newrooms():              #location of rooms called from Rooms() and location
             enemy.rect.centery = 100
             enemylist.add(enemy)
 
-            enemy2 = Enemy2()
-            enemy.rect.centerx = 700
-            enemy.rect.centery = 700
-            enemylist.add(enemy2)
+##            enemy2 = Enemy2()
+##            enemy2.rect.centerx = 700
+##            enemy2.rect.centery = 700
+##            enemylist.add(enemy2)
             
 
     if rooms[0] == 0 and rooms[1] == 0:     # determin9ing the room in which the player is
@@ -438,6 +508,8 @@ def newrooms():              #location of rooms called from Rooms() and location
         wall.rect.left = 325
         wall.rect.centery = 260
         walllist.add(wall)
+
+
  
 #==============================================================================
 #      ________  ________  ________  _____ ______          ________            #
@@ -824,6 +896,11 @@ def newrooms():              #location of rooms called from Rooms() and location
         sofa1.rect.centerx = 770
         sofa1.rect.bottom = 600
         walllist.add(sofa1)
+#
+
+
+
+
 
 
 
@@ -989,17 +1066,8 @@ while not done:
 
     all_sprites_list.update()
 
-    for bullet in bullet_list:
-        block_hit_list = pygame.sprite.spritecollide(bullet, block_list, True)
 
-        for block in block_hit_list:
-            bullet_list.remove(bullet)
-            all_sprites_list.remove(bullet)
 
-        if bullet.rect.y < -10:
-            bullet_list.remove(bullet)
-            all_sprites_list.remove(bullet)
- 
         
     if player.roomchange == 1:
         walllist = pygame.sprite.Group()
@@ -1017,6 +1085,17 @@ while not done:
         rol = 1                      # rol value set to 1
         for player in playerlist:
             Player.facing(rol, uod)
+
+    player_x=player.rect.centerx
+    player_y=player.rect.centery
+         
+    if keypress[pygame.K_y]:
+            print("hello")
+            bullet=Bullet(player_x, player_y, player.direction)
+            bullet_list.add(bullet)
+            bullet.move()
+            
+            
     
         
     if keypress[pygame.K_UP]:        # if up key is pressed 
@@ -1046,18 +1125,39 @@ while not done:
 
 
 
+    # Searching zone, multiple of the smae systems
+
+
+    #end of searching zones
+
+
+
     for enemy in enemylist:
          Enemy.move(1)
 
     for enemy2 in enemylist:
-        Enemy2.move(1)         
+        Enemy2.move(1)
+
+    for bullet in bullet_list:
+        bullet.move()
 
     if player.roomchange == 1:
             enemylist.remove(enemy)
 
     if player.roomchange == 1:
             enemylist.remove(enemy2)
-            
+
+##    if pygame.spritecollide(bullet_list, enemylist):
+##            enemylist.remove(enemy)
+##            bullet_list.remove(bullet)
+    bullet_hit_list = pygame.sprite.spritecollide(enemy, bullet_list, True)
+
+    for bullet in bullet_hit_list:
+        enemylist.remove(enemy)
+        all_sprites_list.remove(bullet)
+        score += 1
+        
+
     for wall in walllist:                                                                                 #========================================================================================
         if player.rect.left >= wall.rect.left and player.rect.right <= wall.rect.right:                   # THE FOLLOWING IS CHECKING WHETHER OR NOT THE PLAYER OR ENEMYIES LOCATION IS EQUAL TO ONE OF THE WALLS
             if player.rect.bottom >= wall.rect.top and player.rect.top <= wall.rect.top:                  # IN WHICH CASE, VELOCITY IS SET TO 0 AND THE PLAYER OR ENEMY IS UNABLE TO MOVE 
@@ -1165,6 +1265,62 @@ while not done:
                 enemy.rect.right = wall.rect.left
 
 
+#Enemy 2
+
+
+        if enemy2.rect.left >= wall.rect.left and enemy2.rect.right <= wall.rect.right:
+            if enemy2.rect.bottom >= wall.rect.top and enemy2.rect.top <= wall.rect.top:
+
+                
+                enemy2.rect.bottom = wall.rect.top
+                
+                
+            if enemy2.rect.top <= wall.rect.bottom and enemy2.rect.bottom >= wall.rect.bottom:
+
+                
+                enemy2.rect.top = wall.rect.bottom
+
+        elif enemy2.rect.left <= wall.rect.right and enemy2.rect.left >= wall.rect.left:
+            if enemy2.rect.bottom >= wall.rect.top and enemy2.rect.top <= wall.rect.top:
+
+                
+                enemy2.rect.left = wall.rect.right
+                
+
+               
+                enemy.rect.bottom = wall.rect.top
+                
+            if enemy2.rect.top <= wall.rect.bottom and enemy2.rect.bottom >= wall.rect.bottom:
+                
+                
+                enemy2.rect.left = wall.rect.right
+                    
+            if enemy2.rect.top >= wall.rect.top and enemy2.rect.bottom <=wall.rect.bottom:
+
+                
+                enemy2.rect.left = wall.rect.right
+                              
+            
+        elif enemy2.rect.right >= wall.rect.left and enemy2.rect.right <= wall.rect.right:
+            if enemy2.rect.bottom >= wall.rect.top and enemy2.rect.top <= wall.rect.top:
+
+                
+                enemy2.rect.right = wall.rect.left
+                
+                
+            if enemy2.rect.top <= wall.rect.bottom and enemy2.rect.bottom >= wall.rect.bottom:
+
+                
+                enemy2.rect.right = wall.rect.left
+                
+                
+            if enemy2.rect.top >= wall.rect.top and enemy2.rect.bottom <=wall.rect.bottom:
+
+                
+                enemy2.rect.right = wall.rect.left
+
+
+
                                                                                                                          #END
 
 
@@ -1174,17 +1330,42 @@ while not done:
                 rooms = [0,0]
                 player.rect.centerx = 137 
                 player.rect.centery = 137
-                score = score + 1
+                deaths = deaths + 1
                 key = 0
+                enemylist.remove(enemy)
+                enemylist.remove(enemy)
+                score = 0
 
+        if enemy2.rect.centerx == player.rect.centerx and enemy2.rect.centery == player.rect.centery:
 
+                player.roomchange = 1                   #is the player and the enemy is the same position, if so increase deaths, set postion back to origional and start screen
+                rooms = [0,0]
+                player.rect.centerx = 137 
+                player.rect.centery = 137
+                deaths = deaths + 1
+                key = 0
+                enemylist.remove(enemy)
+                enemylist.remove(enemy2)
+                score = 0
+                scoretext = myfont.render("Score {0}".format(score), 1, (255,0,0))
+                screen.blit(scoretext, (625, 10))
+        if deaths == 100:
+                ctypes.windll.user32.MessageBoxW(0, "Game Over", "Alert", 1)
+                testVar = input("Save Highscore. Name?")
+                with open('scores.txt', 'w') as output:
+                        output.write("HIGHSCORE: " )
+                        output.write(testVar)
+                        output.write(":")
+                        output.write(" ")
+                        output.write(str(score))
+                pygame.quit()
 
     keypress = pygame.key.get_pressed()        
 
     screen.fill(BROWN)               # Screen fill BROWN
 
 
-    
+    bullet_list.draw(screen)
     imagelist.draw(screen)
     enemylist.draw(screen)    
     walllist.draw(screen)    
@@ -1192,8 +1373,11 @@ while not done:
     player.velocityx = 0            # default x velocity = 0
     player.velocityy = 0            # default y velocity = 0
 
-    scoretext = myfont.render("Deaths {0}".format(score), 1, (0,0,0))
-    screen.blit(scoretext, (5, 10))
+    deathstext = myfont.render("Deaths {0}".format(deaths), 1, (0,0,0))
+    screen.blit(deathstext, (5, 10))
+
+    scoretext = myfont.render("Score {0}".format(score), 1, (0,0,0))
+    screen.blit(scoretext, (625, 10))
 
     pygame.display.flip()
 
